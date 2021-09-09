@@ -7,6 +7,7 @@ namespace SimpleSAML\XHTML;
 use SimpleSAML\Configuration;
 use SimpleSAML\Logger;
 use SimpleSAML\Metadata\MetaDataStorageHandler;
+use SimpleSAML\Module;
 use SimpleSAML\Session;
 use SimpleSAML\Utils;
 
@@ -640,9 +641,12 @@ class IdPDisco
         $t->data['idplist'] = $newlist;
         $t->data['preferredidp'] = $preferredIdP;
         $t->data['return'] = $this->returnURL;
+//        $t->data['return'] = 'https%3A%2F%2Fip-147-251-124-162.flt.cloud.muni.cz%2Fproxy%2Fmodule.php%2Fsaml%2Fsp%2Fdiscoresp.php%3FAuthID%3D_c416e1cebcb6bdd918ce45d8e9c4c313bc6e3bb087%253Ahttps%253A%252F%252Fip-147-251-124-162.flt.cloud.muni.cz%252Fproxy%252Fsaml2%252Fidp%252FSSOService.php%253Fspentityid%253Dhttps%25253A%25252F%25252Faai-playground.ics.muni.cz%25252Fsimplesaml%25252Fmodule.php%25252Fsaml%25252Fsp%25252Fmetadata.php%25252Fdefault-sp%2526RelayState%253Dhttps%25253A%25252F%25252Faai-playground.ics.muni.cz%25252Fsaml%2526cookieTime%253D1627469114';
         $t->data['returnIDParam'] = $this->returnIdParam;
         $t->data['entityID'] = $this->spEntityId;
         $t->data['urlpattern'] = htmlspecialchars(Utils\HTTP::getSelfURLNoQuery());
+//        $t->data['urlpattern'] = htmlspecialchars('https://ip-147-251-124-162.flt.cloud.muni.cz/proxy/module.php/saml/disco.php');
+//        $t->data['urlpattern'] = htmlspecialchars('https://ip-147-251-124-162.flt.cloud.muni.cz/proxy/module.php/saml/disco.php');
         $t->data['rememberenabled'] = $this->config->getBoolean('idpdisco.enableremember', false);
         $t->show();
     }

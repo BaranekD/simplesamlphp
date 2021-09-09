@@ -197,8 +197,10 @@ class MultiAuth extends \SimpleSAML\Auth\Source
         $params = ['AuthState' => $id];
 
         // Allows the user to specify the auth source to be used
-        if (isset($_GET['source'])) {
-            $params['source'] = $_GET['source'];
+        if (isset($_POST['source'])) {
+            if ((isset($_POST['username']) && isset($_POST['password'])) || isset($_POST['idpentityid'])) {
+                MultiAuth::delegateAuthentication($_POST['source'], $state);
+            }
         }
 
         Utils\HTTP::redirectTrustedURL($url, $params);
