@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< Updated upstream
     "content-hash": "f9cec1f24c90eb78ccdd1058505236ce",
+=======
+    "content-hash": "eef902003b1d595cbe400a76d92e28d1",
+>>>>>>> Stashed changes
     "packages": [
         {
             "name": "gettext/gettext",
@@ -4365,6 +4369,7 @@
         },
         {
             "name": "twig/twig",
+<<<<<<< Updated upstream
             "version": "v2.13.1",
             "source": {
                 "type": "git",
@@ -4375,6 +4380,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/twigphp/Twig/zipball/57e96259776ddcacf1814885fc3950460c8e18ef",
                 "reference": "57e96259776ddcacf1814885fc3950460c8e18ef",
+=======
+            "version": "v2.14.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "8e202327ee1ed863629de9b18a5ec70ac614d88f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/8e202327ee1ed863629de9b18a5ec70ac614d88f",
+                "reference": "8e202327ee1ed863629de9b18a5ec70ac614d88f",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -4384,7 +4401,7 @@
             },
             "require-dev": {
                 "psr/container": "^1.0",
-                "symfony/phpunit-bridge": "^4.4.9|^5.0.9"
+                "symfony/phpunit-bridge": "^4.4.9|^5.0.9|^6.0"
             },
             "type": "library",
             "extra": {
@@ -4426,6 +4443,13 @@
             "keywords": [
                 "templating"
             ],
+<<<<<<< Updated upstream
+=======
+            "support": {
+                "issues": "https://github.com/twigphp/Twig/issues",
+                "source": "https://github.com/twigphp/Twig/tree/v2.14.7"
+            },
+>>>>>>> Stashed changes
             "funding": [
                 {
                     "url": "https://github.com/fabpot",
@@ -4436,7 +4460,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< Updated upstream
             "time": "2020-08-05T15:09:04+00:00"
+=======
+            "time": "2021-09-17T08:39:54+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "webmozart/assert",
@@ -4543,6 +4571,7 @@
     "packages-dev": [
         {
             "name": "amphp/amp",
+<<<<<<< Updated upstream
             "version": "v2.5.2",
             "source": {
                 "type": "git",
@@ -4553,6 +4582,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/amphp/amp/zipball/efca2b32a7580087adb8aabbff6be1dc1bb924a9",
                 "reference": "efca2b32a7580087adb8aabbff6be1dc1bb924a9",
+=======
+            "version": "v2.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amphp/amp.git",
+                "reference": "c5fc66a78ee38d7ac9195a37bacaf940eb3f65ae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amphp/amp/zipball/c5fc66a78ee38d7ac9195a37bacaf940eb3f65ae",
+                "reference": "c5fc66a78ee38d7ac9195a37bacaf940eb3f65ae",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -4617,13 +4658,25 @@
                 "non-blocking",
                 "promise"
             ],
+<<<<<<< Updated upstream
+=======
+            "support": {
+                "irc": "irc://irc.freenode.org/amphp",
+                "issues": "https://github.com/amphp/amp/issues",
+                "source": "https://github.com/amphp/amp/tree/v2.6.1"
+            },
+>>>>>>> Stashed changes
             "funding": [
                 {
                     "url": "https://github.com/amphp",
                     "type": "github"
                 }
             ],
+<<<<<<< Updated upstream
             "time": "2021-01-10T17:06:37+00:00"
+=======
+            "time": "2021-09-23T18:43:08+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "amphp/byte-stream",
@@ -4699,6 +4752,7 @@
         },
         {
             "name": "composer/package-versions-deprecated",
+<<<<<<< Updated upstream
             "version": "1.11.99.1",
             "source": {
                 "type": "git",
@@ -4709,6 +4763,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/composer/package-versions-deprecated/zipball/7413f0b55a051e89485c5cb9f765fe24bb02a7b6",
                 "reference": "7413f0b55a051e89485c5cb9f765fe24bb02a7b6",
+=======
+            "version": "1.11.99.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/package-versions-deprecated.git",
+                "reference": "b174585d1fe49ceed21928a945138948cb394600"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/composer/package-versions-deprecated/zipball/b174585d1fe49ceed21928a945138948cb394600",
+                "reference": "b174585d1fe49ceed21928a945138948cb394600",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -4750,6 +4816,13 @@
                 }
             ],
             "description": "Composer plugin that provides efficient querying for installed package versions (no runtime IO)",
+<<<<<<< Updated upstream
+=======
+            "support": {
+                "issues": "https://github.com/composer/package-versions-deprecated/issues",
+                "source": "https://github.com/composer/package-versions-deprecated/tree/1.11.99.4"
+            },
+>>>>>>> Stashed changes
             "funding": [
                 {
                     "url": "https://packagist.com",
@@ -4764,7 +4837,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< Updated upstream
             "time": "2020-11-11T10:22:58+00:00"
+=======
+            "time": "2021-09-13T08:41:34+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "composer/semver",
@@ -5094,6 +5171,7 @@
         },
         {
             "name": "mikey179/vfsstream",
+<<<<<<< Updated upstream
             "version": "v1.6.8",
             "source": {
                 "type": "git",
@@ -5104,6 +5182,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/bovigo/vfsStream/zipball/231c73783ebb7dd9ec77916c10037eff5a2b6efe",
                 "reference": "231c73783ebb7dd9ec77916c10037eff5a2b6efe",
+=======
+            "version": "v1.6.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bovigo/vfsStream.git",
+                "reference": "250c0825537d501e327df879fb3d4cd751933b85"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bovigo/vfsStream/zipball/250c0825537d501e327df879fb3d4cd751933b85",
+                "reference": "250c0825537d501e327df879fb3d4cd751933b85",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -5136,7 +5226,16 @@
             ],
             "description": "Virtual file system to mock the real file system in unit tests.",
             "homepage": "http://vfs.bovigo.org/",
+<<<<<<< Updated upstream
             "time": "2019-10-30T15:31:00+00:00"
+=======
+            "support": {
+                "issues": "https://github.com/bovigo/vfsStream/issues",
+                "source": "https://github.com/bovigo/vfsStream/tree/master",
+                "wiki": "https://github.com/bovigo/vfsStream/wiki"
+            },
+            "time": "2021-09-25T08:05:01+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "myclabs/deep-copy",
@@ -5240,6 +5339,7 @@
         },
         {
             "name": "nikic/php-parser",
+<<<<<<< Updated upstream
             "version": "v4.10.5",
             "source": {
                 "type": "git",
@@ -5250,6 +5350,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/4432ba399e47c66624bc73c8c0f811e5c109576f",
                 "reference": "4432ba399e47c66624bc73c8c0f811e5c109576f",
+=======
+            "version": "v4.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nikic/PHP-Parser.git",
+                "reference": "50953a2691a922aa1769461637869a0a2faa3f53"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/50953a2691a922aa1769461637869a0a2faa3f53",
+                "reference": "50953a2691a922aa1769461637869a0a2faa3f53",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -5288,7 +5400,15 @@
                 "parser",
                 "php"
             ],
+<<<<<<< Updated upstream
             "time": "2021-05-03T19:11:20+00:00"
+=======
+            "support": {
+                "issues": "https://github.com/nikic/PHP-Parser/issues",
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.13.0"
+            },
+            "time": "2021-09-20T12:20:58+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "openlss/lib-array2xml",
@@ -5544,6 +5664,7 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
+<<<<<<< Updated upstream
             "version": "1.0.1",
             "source": {
                 "type": "git",
@@ -5554,6 +5675,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/2e32a6d48972b2c1976ed5d8967145b6cec4a4a9",
                 "reference": "2e32a6d48972b2c1976ed5d8967145b6cec4a4a9",
+=======
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/TypeResolver.git",
+                "reference": "30f38bffc6f24293dadd1823936372dfa9e86e2f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/30f38bffc6f24293dadd1823936372dfa9e86e2f",
+                "reference": "30f38bffc6f24293dadd1823936372dfa9e86e2f",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -5561,9 +5694,14 @@
                 "phpdocumentor/reflection-common": "^2.0"
             },
             "require-dev": {
+<<<<<<< Updated upstream
                 "ext-tokenizer": "^7.1",
                 "mockery/mockery": "~1",
                 "phpunit/phpunit": "^7.0"
+=======
+                "ext-tokenizer": "*",
+                "psalm/phar": "^4.8"
+>>>>>>> Stashed changes
             },
             "type": "library",
             "extra": {
@@ -5587,7 +5725,15 @@
                 }
             ],
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
+<<<<<<< Updated upstream
             "time": "2019-08-22T18:11:29+00:00"
+=======
+            "support": {
+                "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.5.0"
+            },
+            "time": "2021-09-17T15:28:14+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "phpspec/prophecy",
@@ -7106,7 +7252,14 @@
         "ext-date": "*",
         "ext-hash": "*",
         "ext-json": "*",
+<<<<<<< Updated upstream
         "ext-mbstring": "*"
+=======
+        "ext-mbstring": "*",
+        "ext-curl": "*",
+        "ext-soap": "*",
+        "ext-simplexml": "*"
+>>>>>>> Stashed changes
     },
     "platform-dev": {
         "ext-curl": "*"

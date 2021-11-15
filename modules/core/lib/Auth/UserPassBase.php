@@ -254,6 +254,12 @@ abstract class UserPassBase extends \SimpleSAML\Auth\Source
          */
         $url = Module::getModuleURL('core/loginuserpass.php');
         $params = ['AuthState' => $id];
+
+        if (isset($_POST['username']) && isset($_POST['password'])) {
+            $params['username'] = $_POST['username'];
+            $params['password'] = $_POST['password'];
+        }
+
         HTTP::redirectTrustedURL($url, $params);
 
         // The previous function never returns, so this code is never executed.
