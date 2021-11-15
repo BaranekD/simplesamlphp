@@ -1,0 +1,174 @@
+html {
+    position:relative;
+    min-height: 100%;
+}
+
+html, body {
+    margin:0;
+    padding:0;
+}
+
+.social {
+    width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.input {
+    width: 100%;
+}
+
+.metalist {
+    margin-top: 60px;
+}
+
+.metaentry {
+    width: 100%;
+    text-align: left;
+}
+
+.metaentry:hover {
+    background-image: none;
+}
+
+.metaentry:focus {
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+#layout {
+    max-width: 40%;
+    padding: 3% 1% 1%;
+    margin: 2em auto;
+    background: #fff;
+    border: 1px solid #fff;
+    position: relative;
+    text-align: left;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 1rem 3rem 0.5rem;
+}
+
+#header {
+    background: transparent;
+    margin: 0;
+    padding: 0;
+}
+
+#header h1 {
+    text-align: center;
+    line-height: 32px;
+    font-size: 36px;
+    color: #222;
+}
+
+#header img {
+    width: 170px;
+    margin: -16px auto 0 auto;
+}
+
+#wrong_user_pass {
+    text-align: center;
+}
+
+div#content {
+    margin: .4em ! important;
+}
+
+#content, #footer {
+    padding: 0 20px;
+}
+
+#userpass_login_button {
+    margin-top: 30px;
+}
+
+#submit_button {
+    background: #888888;
+    color: white;
+    width: 50%
+}
+
+#userpass {
+    margin-top: 60px;
+    padding-left: 25%;
+    padding-right: 25%;
+}
+
+#external {
+    margin-top: 50px;
+}
+
+#google {
+    background: #d34836;
+    color: white;
+}
+
+#linkedin {
+    background: #0077b5;
+    color: white;
+}
+
+#orcid {
+    background: #a6ce39;
+    color: white;
+}
+
+#copyright {
+    text-align: center;
+}
+
+@media screen and (max-width: 1440px) {
+    #layout {
+        max-width: 60%;
+        padding: 3% 1% 1%;
+        margin: 2em auto;
+        background: #fff;
+        border: 1px solid #fff;
+        position: relative;
+        text-align: left;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 1rem 3rem 0.5rem;
+    }
+
+    #submit_button {
+        background: #888888;
+        color: white;
+        width: 50%
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #layout {
+        max-width: 100%;
+        padding: 3% 1% 1%;
+        margin: 2em auto;
+        background: #fff;
+        border: none;
+        position: relative;
+        text-align: left;
+        box-shadow: none;
+    }
+
+    #submit_button {
+        background: #888888;
+        color: white;
+        width: 100%
+    }
+}
+
+@media screen and (max-width: 320px) {
+    #layout {
+        max-width: 100%;
+        padding: 3% 1% 1%;
+        margin: 2em auto;
+        background: #fff;
+        border: none;
+        position: relative;
+        text-align: left;
+        box-shadow: none;
+    }
+
+    #submit_button {
+        background: #888888;
+        color: white;
+        width: 100%
+    }
+}
