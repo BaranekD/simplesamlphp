@@ -1,0 +1,11 @@
+msgid "{campusidp:wrong_user_pass}"
+msgstr "Wrong username or password!"
+
+msgid "{campusidp:username}"
+msgstr "Username"
+
+msgid "{campusidp:password}"
+msgstr "Password"
+
+msgid "{campusidp:login}"
+msgstr "Log in"

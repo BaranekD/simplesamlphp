@@ -1,0 +1,30 @@
+{% spaceless %}
+    <!DOCTYPE html>
+    <html lang="{{ currentLanguage }}" xml:lang="{{ currentLanguage }}">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="HandheldFriendly" content="true">
+        <title>{{ pagetitle }}</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/{{ baseurlpath }}resources/campus_idp.css" />
+        <meta name="robots" content="noindex, nofollow">
+        {% block preload %}{% endblock %}
+    </head>
+    <body id="{{ templateId }}">
+    <div id="layout">
+        {% block header %}{% include "_header_campus.twig" %}{% endblock %}
+        <div id="content">
+            <div class="wrap">
+                {% block contentwrapper %}{% block content %}{% endblock %}{% endblock contentwrapper %}
+            </div>
+        </div>{# content #}
+        <div id="foot">
+            {% block footer %}{% include "_footer_campus.twig" %}{% endblock %}
+        </div>
+    </div>{# layout #}
+    {% block postload %}{% endblock %}
+    </body>
+    </html>
+{% endspaceless %}
