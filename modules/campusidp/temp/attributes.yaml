@@ -1,0 +1,396 @@
+##### BOTH #####
+
+rpIdentifier:
+    now: [entityId, OIDCClientID, SAMLEntityID]
+    displayName: Identifier
+    description: Service ID
+    type: String
+voShortNames:
+    now: [voShortNames]
+    displayName: VO short names
+    description: VO short names
+    type: List
+rpWayfFilter:
+    now: [wayfFilter]
+    displayName: WAYF Filter
+    description: WAYF Filter
+    type: String
+rpWayfEFilter:
+    now: [wayfEFilter]
+    displayName: WAYF E-Filter
+    description: WAYF E-Filter
+    type: String
+rpRequiredAups:
+    now: [reqAups]
+    displayName: Required AUPs
+    description: List of required AUP names. Users must agree with all recent AUPs before accessing the service represented by this facility.
+    type: List
+capabilities:
+    now: [capabilities]
+    displayName: Capabilities
+    description: Capabilities according to AARC specification. i.e. specification of facility and optional actions.
+    type: List
+rpEnvironment: # TODO
+    now: [isTestSp, isOidcFacility, isSamlFacility]
+    displayName:
+    description:
+    type:
+rpDisplayInSericeList:
+    now: [showOnServiceList]
+    displayName: Display in service list
+    description: If TRUE, facility will be shown on service list
+    type: Bool
+rpProxyIdentifiers:
+    now: [proxyIdentifiers]
+    displayName: Proxy identifiers
+    description: List of proxy rpIdentifiers
+    type: List
+rpConsentDisabled:
+    now: [consentEnabled, rpConsentDisable]
+    displayName: Consent disabled
+    description: if TRUE, consent won't be shown for this SP
+    type: Bool
+rpIdpFilter:
+    now: [idpFilter]
+    displayName: IdP filter
+    description: Filter of IdPs shown on WAYF
+    type: String
+rpMasterProxyIdentifier:
+    now: [masterProxyIdentifier]
+    displayName: Master proxy identifiers
+    description: Identifier of the ProxyIdP where the service is registered
+    type: String
+rpEnsureVoEnabled:
+    now: [rpEnableEnsureVoFiltering]
+    displayName: Ensure VO enabled
+    description: Whether proxy will trigger the "ensureVO" filter
+    type: Bool
+rpEnsureVoDefinition:
+    now: [rpEnsureVoDefinition]
+    displayName: Ensure VO definition
+    description: Short name of VO, which proxy check if the user is member of
+    type: String
+rpLoginUrl:
+    now: [rpLoginURL, loginURL]
+    displayName: Login URL
+    description: URL where user can log in to the service.
+    type: String
+rpManagersGroupId:
+    now: [rpManagersGroupId]
+    displayName: Managers group ID
+    description: ID of the group with service managers
+    type: Integer
+
+##### SAML #####
+
+rpSamlAssertionConsumerServices:
+    now: [assertionConsumerService, assertionConsumerServices]
+    displayName: SAML Assertion consumer services
+    description: Map of binding to endpoint URLs
+    type: Map
+rpSamlSingleLogoutServices:
+    now: [singleLogoutService, singleLogoutServices]
+    displayName: SAML Single logout services
+    description: Map of binding to endpoint URLs
+    type: Map
+rpSamlRequiredAttributes:
+    now: [requiredAttributes]
+    displayName: SAML Required attributes
+    description: User attributes the service needs
+    type: List
+rpSamlSigningCertificate:
+    now: [signingCert]
+    displayName: SAML Signing certificate
+    description: Base64-encoded X509 certificate
+    type: ??? # String nebo List? Podle Peruna List, pak by se ale mozna hodilo pojmenovat jako ...Certificates?
+rpSamlMetadataUrl:
+    now: [metadataURL]
+    displayName: SAML Metadata URL
+    description: URL to SAML metadata
+    type: String
+rpSamlNameIdFormat: # MUNI
+    now: [nameIDFormat]
+    displayName: NameID format
+    description: Fully qualified NameID format for SAML
+    type: String
+rpSamlRelayState: # MUNI
+    now: [relayState]
+    displayName: Relay state
+    description: Fixed relay state for SAML
+    type: String
+rpSamlArtifactResolutionServices: # MUNI
+    now: [artifactResolutionServices]
+    displayName: Artifact resolution services
+    description: Map of binding to comma separated endpoint URLs
+    type: Map
+rpSamlEntityCategory: # MUNI
+    now: [entityCategory]
+    displayName: Entity Category
+    description: See RFC 8409
+    type: ???
+rpSamlSingleSignOnServices: # MUNI
+    now: [singleSignOnServices]
+    displayName: Single sign-on services
+    description: Map of binding to comma separated endpoint URLs
+    type: Map
+rpSamlDisableEncryption: # MUNI
+    now: [spDisableEncryption]
+    displayName: SP disable encryption
+    description: Whether to disable assertion encryption even if SP has encryption certificate
+    type: Bool
+rpSamlEncodeAttributesInBase64:
+    now: []
+    displayName: SAML Encode attributes in base64
+    description: If TRUE, attributes will be encoded in base64
+    type: Bool
+rpSamlUseridAttribute:
+    now: []
+    displayName: SAML User ID attribute
+    description: The attribute name of an attribute which uniquely identifies the user
+    type: String
+rpSamlAttributeEncodings:
+    now: []
+    displayName: SAML Attribute encodings
+    description: Contains info about what encoding should be used for the different attributes
+    type: Map
+rpSamlAttributesNameFormat:
+    now: []
+    displayName: SAML Attributes name format
+    description: Contains info about what value will be set in the Format field of attribute statements
+    type: String
+rpSamlAudience:
+    now: []
+    displayName: SAML Audience
+    description: An array of additional entities to be added to the AudienceRestriction, by default the only audience is the SP's entityID
+    type: List
+rpSamlSigningKey:
+    now: []
+    displayName: SAML Signing key
+    description: The base64 encoded certificate for this SP
+    type: String
+rpSamlBlacklistedEncryptionAlgorithms:
+    now: []
+    displayName: SAML Blacklisted encryption algorithms
+    description: Blacklisted encryption alhorithms
+    type: List
+rpSamlForceAuthn:
+    now: [rpForceAuthn]
+    displayName: SAML Force Authn
+    description: If TRUE, Force Authn is turned on
+    type: Bool
+rpSamlNameidEncryption:
+    now: []
+    displayName: SAML NameID encryption
+    description: If TRUE, NameIDs sent to the SP should be encrypted
+    type: Bool
+rpSamlSignResponse:
+    now: []
+    displayName: SAML Sign response
+    description: If TRUE, <samlp:Response> messages should be signed
+    type: Bool
+rpSamlSignAssertion:
+    now: []
+    displayName: SAML Sign assertion
+    description: If TRUE, <saml:Assertion> elements should be signed
+    type: Bool
+rpSamlSignatureAlgorithm:
+    now: []
+    displayName: SAML Signature algorithm
+    description: The algorithm to use when signing any message sent to the SP
+    type: String
+rpSamlSignLogout:
+    now: [rpSignLogout]
+    displayName: SAML Sign logout
+    description: If TRUE, logout messages sent to the SP should be signed
+    type: Bool
+rpSamlNameIdAttribute:
+    now: []
+    displayName: SAML NameID attribute
+    description: The name of the attribute which should be used as the value of the NameID
+    type: String
+rpSamlReleaseAttributes:
+    now: []
+    displayName: SAML Release attributes
+    description: Whether the SP should receive any attributes from the IdP
+    type: Bool
+rpSamlSingleLogoutServiceResponseUrl:
+    now: []
+    displayName: SAML Single logout service response URL
+    description: Specifies where should be sent URL logout responses to the SP
+    type: String
+rpSamlValidateAuthnRequest:
+    now: [rpValidateAuthnRequest]
+    displayName: SAML Validate Authn request
+    description: Whether we require signatures on authentication requests sent from the SP
+    type: Bool
+rpSamlValidateLogout:
+    now: []
+    displayName: SAML Validate logout
+    description: Whether we require signatures on logout messages sent from the SP
+    type: Bool
+rpSamlEncryptAssertion:
+    now: []
+    displayName: SAML Encrypt assertion
+    description: Whether assertions sent to the SP should be encrypted
+    type: Bool
+rpSamlSignRedirect:
+    now: []
+    displayName: SAML Sign redirect
+    description: Whether logout requests and logout responses sent to the SP should be signed
+    type: Bool
+rpSamlValidateRedirect:
+    now: []
+    displayName: SAML Validate redirect
+    description: Whether authentication requests, logout requests and logout responses received from the SP should be validated
+    type: Bool
+rpSamlIdpList:
+    now: []
+    displayName: SAML IdP list
+    description: The list of scoped idps ie. the list of identifiers for idps that are relevant for the sp
+    type: List
+
+##### OIDC #####
+
+rpOidcClientSecret:
+    now: [OIDCClientSecret]
+    displayName: OIDC Client secret
+    description: OIDC Client secret
+    type: String
+rpOidcRedirectUris:
+    now: [OIDCRedirectURIs]
+    displayName: OIDC Redirect URIs
+    description: URIs where can be the client redirected after the authorization page
+    type: List
+rpOidcFlowTypes:
+    now: [OIDCFlowTypes]
+    displayName: OIDC Flow types
+    description: Types of flows (grant types) for OIDC clients
+    type: List
+rpOidcCodeChallengeType:
+    now: [OIDCCodeChallengeType]
+    displayName: OIDC Code challenge type
+    description: Type of challenge for OIDC authorization_code (or hybrid) flow
+    type: String
+rpOidcIssueRefreshTokens:
+    now: [OIDCIssuedRefreshTokens, OIDCIssueRefreshTokens]
+    displayName: OIDC Issue refresh tokens
+    description: Whether OIDC will issue refresh tokens
+    type: Bool
+rpOidcAllowIntrospection:
+    now: [OIDCAllowIntrospection]
+    displayName: OIDC Allow introspection
+    description: Whether client can call introspection endpoint
+    type: Bool
+rpOidcScopes:
+    now: [requiredScopes]
+    displayName: OIDC Scopes
+    description: OAuth scopes this client is allowed to request
+    type: List
+rpOidcLogoutRedirectUris: # MUNI # Difference between logout and postLogout?
+    now: [OIDCLogoutRedirectURIs]
+    displayName: OIDC Post Logout Redirect URIs
+    description: URIs that the client can be redirected to after logout
+    type: List
+rpOidcPostLogoutRedirectUris: # Difference between logout and postLogout?
+    now: [OIDCPostLogoutRedirectURIs]
+    displayName: OIDC Post Logout Redirect URIs
+    description: URIs that the client can be redirected to after logout
+    type: List
+rpOidcTokenTimeouts:
+    now: [rpMitreTokensTimeout]
+    displayName: OIDC token timeouts
+    description: A Map of OIDC tokens and their timeouts
+    type: Map
+
+##### SERVICE #####
+
+rpServiceDescription:
+    now: [serviceDescription]
+    displayName: Service description
+    description: Description of the service
+    type: Map
+rpServiceName:
+    now: [serviceName]
+    displayName: Service name
+    description: Name of the service
+    type: Map
+rpServicePrivacyPolicy:
+    now: [privacyPolicyURL, spPrivacyPolicyURL, rpPrivacyPolicyURL]
+    displayName: Privacy policy URL
+    description: Link to the service’s Privacy Policy document
+    type: String
+rpServiceInformationUrl:
+    now: [spInformationURL, informationURL, rpInformationURL, serviceInformationURL]
+    displayName: Service information URL
+    description: URL where information about the service can be found
+    type: String # String X Map?
+rpServiceRas:
+    now: [RaS]
+    displayName: Research and Scholarship
+    description: Whether the service comes from R&S field
+    type: Bool
+rpServicePrivacyPolicyUrl:
+    now: [privacyPolicyURL, spPrivacyPolicyURL, rpPrivacyPolicyURL]
+    displayName: Privacy policy URL
+    description: Privacy policy URL
+    type: String
+rpServiceSupportContacts:
+    now: [spSupportContact, rpSupportContact]
+    displayName: Service support contacts
+    description: Service support contacts
+    type: List
+rpServiceSecurityContacts:
+    now: [spSecurityContact]
+    displayName: Service security contacts
+    description: Service security contacts
+    type: List
+rpServiceIsInternal: # MUNI
+    now: [spInternal]
+    displayName: Internal service
+    description: Whether this is an internal service which does not require attribute release consent
+    type: Bool
+rpServiceAdministrationContacts:
+    now: [serviceAdministrationContact, administratorContact, spAdminContact, rpAdminContact, adminContact]
+    displayName: Service administration contacts
+    description: Emails of administrators responsible for the service
+    type: List
+
+##### ORGANIZATION #####
+
+rpOrganizationName:
+    now: [organizationName]
+    displayName: Organization name
+    description: Name of the service organization
+    type: Map
+rpOrganizationUrl:
+    now: [organizationURL, spOrganizationURL]
+    displayName: Organization URL
+    description: Link to organization’s website
+    type: String
+rpOrganizationCoCo:
+    now: [CoCo]
+    displayName: Code of Conduct
+    description: Whether the organization commits to the GEANT CoCo
+    type: Bool
+
+##### ACCESS CONTROL #####
+rpAcCheckGroupMembership:
+    now: [checkGroupMembership, OIDCCheckGroupMembership]
+    displayName: Check group membership
+    description: Whether the group membership is checked
+    type: Bool
+rpAcDenyRegistration:
+    now: [allowRegistration]
+    displayName: Deny registration
+    description: Whether the registration to the facility is denied
+    type: Bool
+rpAcAllowDynamicRegistration:
+    now: [dynamicRegistration]
+    displayName: Allow dynamic registration
+    description: Whether the dynamic registration is allowed
+    type: Bool
+rpAcCustomRegistrationUrl:
+    now: [registrationURL, registerUrl]
+    displayName: Custom registration URL
+    description: URL where user can register to obtain access to the service
+    type: String
