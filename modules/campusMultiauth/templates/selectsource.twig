@@ -5,18 +5,18 @@
     <form id="userpass" action="{{ currentUrl }}" method="post" name="f">
 
         {% if wrongUserPass == true %}
-            <div id="wrong_user_pass" class="alert alert-danger" role="alert">{{ '{campusidp:wrong_user_pass}'|trans }}</div>
+            <div id="wrong_user_pass" class="alert alert-danger" role="alert">{{ '{campusMultiauth:wrong_user_pass}'|trans }}</div>
         {% endif %}
 
         <p>
-            <label for="username">{{ '{campusidp:username}'|trans }}</label>
+            <label for="username">{{ '{campusMultiauth:username}'|trans }}</label>
             <br>
             <span>
                 <input id="username" class="input" type="text" name="username">
             </span>
         </p>
         <p>
-            <label for="password">{{ '{campusidp:password}'|trans }}</label>
+            <label for="password">{{ '{campusMultiauth:password}'|trans }}</label>
             <br>
             <span>
                 <input id="password" class="input" type="password" name="password" autocomplete="current-password">
@@ -26,13 +26,13 @@
             <p id="submit" class="btn-wrap">
                 <button id="submit_button" class="btn" type="submit">
                     <span>
-                        {{ '{campusidp:login}'|trans }}
+                        {{ '{campusMultiauth:login}'|trans }}
                     </span>
                 </button>
             </p>
         </div>
         <input type="hidden" id="authstate" name="authstate" value="{{ authstate }}" />
-        <input type="hidden" id="source" name="source" value="ecp-auth" />
+        <input type="hidden" id="source" name="source" value="campus-userpass" />
     </form>
 
     <form id="external" action="{{ currentUrl }}" method="post" name="g">

@@ -5,7 +5,7 @@ use SimpleSAML\Auth\State;
 use SimpleSAML\Error\BadRequest;
 use SimpleSAML\Module;
 use SimpleSAML\Module\core\Auth\UserPassBase;
-use SimpleSAML\Module\ecpauth\Auth\Source\ECPAuth;
+use SimpleSAML\Module\campusUserPass\Auth\Source\ECPAuth;
 use SimpleSAML\Utils\HTTP;
 
 if (!array_key_exists('AuthState', $_REQUEST)) {
@@ -95,5 +95,5 @@ if (!empty($_REQUEST['username']) || !empty($password)) {
     }
 }
 
-$url = Module::getModuleURL('campusidp/selectsource.php');
+$url = Module::getModuleURL('campusMultiauth/selectsource.php');
 HTTP::redirectTrustedURL($url, ['AuthState' => $authStateId, 'wrongUserPass' => true]);

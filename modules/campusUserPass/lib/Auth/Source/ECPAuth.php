@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SimpleSAML\Module\ecpauth\Auth\Source;
+namespace SimpleSAML\Module\campusUserPass\Auth\Source;
 
 use SimpleSAML\Auth\Source;
 use SimpleSAML\Auth\State;
@@ -39,7 +39,7 @@ class ECPAuth extends UserPassBase
         $state[self::AUTHID] = $this->authId;
         $id = State::saveState($state, self::STAGEID);
 
-        $url = Module::getModuleURL('ecpauth/ecpauth.php');
+        $url = Module::getModuleURL('campusUserPass/campusUserPass.php');
         $params = ['AuthState' => $id];
 
         if (isset($_POST['username']) && isset($_POST['password'])) {
@@ -58,32 +58,6 @@ class ECPAuth extends UserPassBase
         }
 
         $spconfig = $source-> getMetadata();
-
-//        $metadataHandler = MetaDataStorageHandler::getMetadataHandler();
-//        $idpMetadata = $metadataHandler->getMetaDataConfig(
-//            'https://ip-147-251-124-162.flt.cloud.muni.cz/campus-idp/',
-//            'saml20-idp-hosted'
-//        );
-//
-//        $ar = new AuthnRequest();
-//
-//        $issuer = new Issuer();
-//        $issuer->setValue($spconfig->getString('entityid'));
-//        $ar->setIssuer($issuer);
-//
-//        $ar->setDestination(
-//            'https://ip-78-128-251-177.flt.cloud.muni.cz/Shibboleth.sso/SAML2/ECP?username=' . $username . '&password=' . $password
-//            'https://ucn.id.muni.cz/ms-subucn/saml2/idp/SSOService.php?username=' . $username . '&password=' . $password
-//        );
-//
-//        $ar->setAssertionConsumerServiceIndex(2);
-//        $ar->setAttributeConsumingServiceIndex($spMetadata->getInteger('AttributeConsumingServiceIndex', null));
-//
-//        $response = $this->send($ar, $spconfig, $idpMetadata);
-//
-//        echo print_r($response, true);
-//
-//        die;
 
         $xml = new SimpleXMLElement('<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/"></S:Envelope>');
 

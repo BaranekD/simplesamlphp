@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SimpleSAML\Module\campusidp\Auth\Source;
+namespace SimpleSAML\Module\campusMultiauth\Auth\Source;
 
 use Exception;
 use SimpleSAML\Auth;
@@ -20,7 +20,7 @@ class Campusidp extends Source
 
     public const SOURCESID = '\SimpleSAML\Module\campusidp\Auth\Source\Campusidp.SourceId';
 
-    public const SESSION_SOURCE = 'campusidp:selectedSource';
+    public const SESSION_SOURCE = 'campusMultiauth:selectedSource';
 
     private $sources;
 
@@ -65,7 +65,7 @@ class Campusidp extends Source
         /* Redirect to the select source page. We include the identifier of the
          * saved state array as a parameter to the login form
          */
-        $url = Module::getModuleURL('campusidp/selectsource.php');
+        $url = Module::getModuleURL('campusMultiauth/selectsource.php');
         $params = ['AuthState' => $id];
 
         Utils\HTTP::redirectTrustedURL($url, $params);

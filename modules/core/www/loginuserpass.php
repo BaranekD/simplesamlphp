@@ -102,42 +102,39 @@ if (!empty($_REQUEST['username']) || !empty($password)) {
     }
 }
 
-$url = Module::getModuleURL('campusidp/selectsource.php');
-HTTP::redirectTrustedURL($url, ['AuthState' => $authStateId, 'wrongUserPass' => true]);
+$globalConfig = \SimpleSAML\Configuration::getInstance();
+$t = new \SimpleSAML\XHTML\Template($globalConfig, 'core:loginuserpass.tpl.php');
+$t->data['stateparams'] = ['AuthState' => $authStateId];
+if (array_key_exists('forcedUsername', $state)) {
+    $t->data['username'] = $state['forcedUsername'];
+    $t->data['forceUsername'] = true;
+    $t->data['rememberUsernameEnabled'] = false;
+    $t->data['rememberUsernameChecked'] = false;
+    $t->data['rememberMeEnabled'] = $source->isRememberMeEnabled();
+    $t->data['rememberMeChecked'] = $source->isRememberMeChecked();
+} else {
+    $t->data['username'] = $username;
+    $t->data['forceUsername'] = false;
+    $t->data['rememberUsernameEnabled'] = $source->getRememberUsernameEnabled();
+    $t->data['rememberUsernameChecked'] = $source->getRememberUsernameChecked();
+    $t->data['rememberMeEnabled'] = $source->isRememberMeEnabled();
+    $t->data['rememberMeChecked'] = $source->isRememberMeChecked();
+    if (isset($_COOKIE[$source->getAuthId() . '-username'])) {
+        $t->data['rememberUsernameChecked'] = true;
+    }
+}
+$t->data['links'] = $source->getLoginLinks();
+$t->data['errorcode'] = $errorCode;
+$t->data['errorcodes'] = SimpleSAML\Error\ErrorCodes::getAllErrorCodeMessages();
+$t->data['errorparams'] = $errorParams;
+if (!empty($queryParams)) {
+    $t->data['queryParams'] = $queryParams;
+}
 
-//$globalConfig = \SimpleSAML\Configuration::getInstance();
-//$t = new \SimpleSAML\XHTML\Template($globalConfig, 'core:loginuserpass.tpl.php');
-//$t->data['stateparams'] = ['AuthState' => $authStateId];
-//if (array_key_exists('forcedUsername', $state)) {
-//    $t->data['username'] = $state['forcedUsername'];
-//    $t->data['forceUsername'] = true;
-//    $t->data['rememberUsernameEnabled'] = false;
-//    $t->data['rememberUsernameChecked'] = false;
-//    $t->data['rememberMeEnabled'] = $source->isRememberMeEnabled();
-//    $t->data['rememberMeChecked'] = $source->isRememberMeChecked();
-//} else {
-//    $t->data['username'] = $username;
-//    $t->data['forceUsername'] = false;
-//    $t->data['rememberUsernameEnabled'] = $source->getRememberUsernameEnabled();
-//    $t->data['rememberUsernameChecked'] = $source->getRememberUsernameChecked();
-//    $t->data['rememberMeEnabled'] = $source->isRememberMeEnabled();
-//    $t->data['rememberMeChecked'] = $source->isRememberMeChecked();
-//    if (isset($_COOKIE[$source->getAuthId() . '-username'])) {
-//        $t->data['rememberUsernameChecked'] = true;
-//    }
-//}
-//$t->data['links'] = $source->getLoginLinks();
-//$t->data['errorcode'] = $errorCode;
-//$t->data['errorcodes'] = SimpleSAML\Error\ErrorCodes::getAllErrorCodeMessages();
-//$t->data['errorparams'] = $errorParams;
-//if (!empty($queryParams)) {
-//    $t->data['queryParams'] = $queryParams;
-//}
-//
-//if (isset($state['SPMetadata'])) {
-//    $t->data['SPMetadata'] = $state['SPMetadata'];
-//} else {
-//    $t->data['SPMetadata'] = null;
-//}
-//
-//$t->show();
+if (isset($state['SPMetadata'])) {
+    $t->data['SPMetadata'] = $state['SPMetadata'];
+} else {
+    $t->data['SPMetadata'] = null;
+}
+
+$t->show();
