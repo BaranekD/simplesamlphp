@@ -5,20 +5,20 @@
 
         {% if counter % 3 == 1 %}
             <div class="row preferred-row">
-                <div class="col-md-4">
-                    <button class="metaentry list-group-item preferred-item" style="color: {{ idp.color_text }}; background-color: {{ idp.color_background }}" type="submit" name="idpentityid" value="{{ idp.entityid }}">
+                <div class="col-md-4 preferred-item">
+                    <button class="metaentry list-group-item preferred-item-button" style="color: {{ idp.color_text }}; background-color: {{ idp.color_background }}" type="submit" name="idpentityid" value="{{ idp.entityid }}">
                         <strong>{{ idp.name }}</strong>
                     </button>
                 </div>
         {% elseif counter % 3 == 2 %}
-                <div class="col-md-4">
-                    <button class="metaentry list-group-item preferred-item" style="color: {{ idp.color_text }}; background-color: {{ idp.color_background }}" type="submit" name="idpentityid" value="{{ idp.entityid }}">
+                <div class="col-md-4 preferred-item">
+                    <button class="metaentry list-group-item preferred-item-button" style="color: {{ idp.color_text }}; background-color: {{ idp.color_background }}" type="submit" name="idpentityid" value="{{ idp.entityid }}">
                         <strong>{{ idp.name }}</strong>
                     </button>
                 </div>
         {% elseif counter % 3 == 0 %}
-                <div class="col-md-4">
-                    <button class="metaentry list-group-item preferred-item" style="color: {{ idp.color_text }}; background-color: {{ idp.color_background }}" type="submit" name="idpentityid" value="{{ idp.entityid }}">
+                <div class="col-md-4 preferred-item">
+                    <button class="metaentry list-group-item preferred-item-button" style="color: {{ idp.color_text }}; background-color: {{ idp.color_background }}" type="submit" name="idpentityid" value="{{ idp.entityid }}">
                         <strong>{{ idp.name }}</strong>
                     </button>
                 </div>

@@ -36,7 +36,7 @@ html, body {
     background-color: rgba(0, 0, 0, 0.05);
 }
 
-.preferred-item {
+.preferred-item-button {
     text-align: center;
 }
 
@@ -160,6 +160,14 @@ div#content {
         color: white;
         width: 100%
     }
+
+    .preferred-item {
+        margin-bottom: 10px;
+    }
+
+    .preferred-row {
+        margin-bottom: 0;
+    }
 }
 
 @media screen and (max-width: 320px) {
@@ -174,9 +182,8 @@ div#content {
         box-shadow: none;
     }
 
-    #submit_button {
-        background: #888888;
-        color: white;
-        width: 100%
+    #userpass {
+        padding-left: 0;
+        padding-right: 0;
     }
 }

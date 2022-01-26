@@ -3,6 +3,7 @@
 use SimpleSAML\Auth\State;
 use SimpleSAML\Configuration;
 use SimpleSAML\Error\BadRequest;
+use SimpleSAML\Logger;
 use SimpleSAML\Metadata\MetaDataStorageHandler;
 use SimpleSAML\Module\campusMultiauth\Auth\Source\Campusidp;
 use SimpleSAML\XHTML\Template;
@@ -29,13 +30,24 @@ $wayfConfig = $state['wayf_config'];
 $metadata = $metadataStorageHandler->getList('metadata-edugain/saml20-idp-remote');
 $metadata = array_diff_key($metadata, array_flip((array) $wayfConfig['idps']['exclude']));
 
+$data = [];
+$id = 0;
+foreach ($metadata as $idpentry) {
+    $item['id'] = $id;
+    $item['idpentityid'] = $idpentry['entityid'];
+    $item['text'] = $idpentry['name']['en'];
+
+    array_push($data, $item);
+    $id++;
+}
+
 $globalConfig = Configuration::getInstance();
 $t = new Template($globalConfig, 'campusMultiauth:selectsource.php');
 
 array_key_exists('wrongUserPass', $_REQUEST) ? $t->data['wrongUserPass'] = true : $t->data['wrongUserPass'] = false;
 $t->data['authstate'] = $authStateId;
 $t->data['currentUrl'] = htmlentities($_SERVER['PHP_SELF']);
-$t->data['metadata'] = $metadata;
+$t->data['metadata'] = $data;
 $t->data['wayf_config'] = $state['wayf_config'];
 
 $t->show();
