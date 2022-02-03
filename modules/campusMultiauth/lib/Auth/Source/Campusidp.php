@@ -15,14 +15,13 @@ use SimpleSAML\Utils;
 class Campusidp extends Source
 {
     public const AUTHID = '\SimpleSAML\Module\campusidp\Auth\Source\Campusidp.AuthId';
-
     public const STAGEID_USERPASS = '\SimpleSAML\Module\core\Auth\UserPassBase.state';
-
     public const SOURCESID = '\SimpleSAML\Module\campusidp\Auth\Source\Campusidp.SourceId';
-
     public const SESSION_SOURCE = 'campusMultiauth:selectedSource';
+    public const WAYF_CONFIG = 'wayf_config';
 
     private $sources;
+    private $wayfConfig;
 
 
     public function __construct($info, $config)
@@ -52,12 +51,18 @@ class Campusidp extends Source
                 'AuthnContextClassRef' => $class_ref,
             ];
         }
+
+        $this->wayfConfig = $config[self::WAYF_CONFIG];
+        if (empty($this->wayfConfig)) {
+            throw new Exception('Missing configuration option \'' . self::WAYF_CONFIG . '\'.');
+        }
     }
 
     public function authenticate(&$state)
     {
         $state[self::AUTHID] = $this->authId;
         $state[self::SOURCESID] = $this->sources;
+        $state[self::WAYF_CONFIG] = $this->wayfConfig;
 
         // Save the $state array, so that we can restore if after a redirect
         $id = Auth\State::saveState($state, self::STAGEID_USERPASS);

@@ -1,0 +1,12 @@
+<div class="metalist list-group">
+    <form action="{{ currentUrl }}" method="post">
+        {% for idp in metadata %}
+            <button class="metaentry list-group-item" type="submit" name="idpentityid" value="{{ idp.entityid }}">
+                <strong>{{ idp.name.en }}</strong>
+            </button>
+        {% endfor %}
+
+        <input type="hidden" id="authstate" name="authstate" value="{{ authstate }}" />
+        <input type="hidden" id="source" name="source" value="default-sp" />
+    </form>
+</div>

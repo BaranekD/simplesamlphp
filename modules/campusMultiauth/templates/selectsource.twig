@@ -2,76 +2,34 @@
 
 {% block content %}
 
-    <form id="userpass" action="{{ currentUrl }}" method="post" name="f">
+    {% if wayf_config.userpass.order == 1 %}
+        {% include 'userpass.twig' %}
+    {% elseif wayf_config.preferred_idps.order == 1 %}
+       {% include 'preferred_idps.twig' %}
+    {% elseif wayf_config.idps.order == 1 %}
+        {% include 'idps.twig' %}
+    {% else %}
+        <h1>ERROR</h1>
+    {% endif %}
 
-        {% if wrongUserPass == true %}
-            <div id="wrong_user_pass" class="alert alert-danger" role="alert">{{ '{campusMultiauth:wrong_user_pass}'|trans }}</div>
-        {% endif %}
+    {% if wayf_config.userpass.order == 2 %}
+        {% include 'userpass.twig' %}
+    {% elseif wayf_config.preferred_idps.order == 2 %}
+        {% include 'preferred_idps.twig' %}
+    {% elseif wayf_config.idps.order == 2 %}
+        {% include 'idps.twig' %}
+    {% else %}
+        <h1>ERROR</h1>
+    {% endif %}
 
-        <p>
-            <label for="username">{{ '{campusMultiauth:username}'|trans }}</label>
-            <br>
-            <span>
-                <input id="username" class="input" type="text" name="username">
-            </span>
-        </p>
-        <p>
-            <label for="password">{{ '{campusMultiauth:password}'|trans }}</label>
-            <br>
-            <span>
-                <input id="password" class="input" type="password" name="password" autocomplete="current-password">
-            </span>
-        </p>
-        <div id="userpass_login_button" class="row">
-            <p id="submit" class="btn-wrap">
-                <button id="submit_button" class="btn" type="submit">
-                    <span>
-                        {{ '{campusMultiauth:login}'|trans }}
-                    </span>
-                </button>
-            </p>
-        </div>
-        <input type="hidden" id="authstate" name="authstate" value="{{ authstate }}" />
-        <input type="hidden" id="source" name="source" value="campus-userpass" />
-    </form>
-
-    <form id="external" action="{{ currentUrl }}" method="post" name="g">
-        <div class="row">
-            <div class="col-md-4">
-                <button id="google" class="btn btn-block social" type="submit" name="idpentityid" value="https://login.elixir-czech.org/google-idp/">
-                    <img alt="icon" src="data:image/png;base64,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">
-                    <strong> Google </strong>
-                </button>
-            </div>
-            <div class="col-md-4">
-                <button id="linkedin" class="btn btn-block social" type="submit" name="idpentityid" value="https://login.elixir-czech.org/linkedin-idp/">
-                    <img alt="icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAYAAAA6RwvCAAAABHNCSVQICAgIfAhkiAAAAWVJREFUWIXtmLFqwzAQhqW2e055A0HpLFLoakwfIEt3T3kNe0rH4KnzaUwWz4VyZPVDlDgPUPwE5ToZgqIkDbFiDfk3S3fnj9P5fEgAAJRlWfJAQkQEABBDQuzCSGZmEYHuhgboFDeItXallBpLKaVSamytXQUncQuHiGqfHRHVIQt2LyPr9frLB3JovS/9u0a2220TkCOeo9kDYWZGxCUAKCGEAACFiMuQEMzM0TS0h74DNk3zs9lsvrvn0WgEk8nk6aSjL02n7Nw9Iqrbtv3Nsmzm8wUAtVgsPo4dTS8geZ7Pu5o6pizLZkFBztGhr+/qINPp9C04SJ7ncyKqiaiuqurTGPPs2gCACgpSFMW7G+dQc/S9s7cxIEmS10v8g84jaZq+XB1Ea/14ib+3xUsppbu2a3dq/5xYneIeFYfQDcTVDcRVNBNaNBmJBuRea62NMWZICGutFQAAiIi+X/M11F3U/AGkRIp++Q2xrwAAAABJRU5ErkJggg==">
-                    <strong> Linkedin </strong>
-                </button>
-            </div>
-            <div class="col-md-4">
-                <button id="orcid" class="btn btn-block social" type="submit" name="idpentityid" value="https://login.elixir-czech.org/orcid-idp/">
-                    <img alt="icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4AoHAAsCAA0p3QAAAhhJREFUWMPNlzFrFFEQx3+zXETxBMHKQg3CEQMhReBUgh8gEUGwsklvvoGCWPgJxMIvcIJyYKFwMViIaAhEsYlICos7ogERtBILlfxtZuWx7rvb5Hbv/De7+97szP/NvDdvBgpCUl3SsqTHkrr6F12fW5ZUpyxIakrqaO/oSGru16j5s63h0Q51ZmER4yeBD0AtT2av6wF+Aw1g28wUTiY5xqeAHjBRgvF0kROucyrriSRn5Vs5Sr4EqxkGW8CpkIRlPPDT2YbYMLPzPq8SPPLDzA7neaDtMc/iPeXiULoxs0etH15K2lG5aIYEOho9OmGG64c1l5sJxq4PyCMXJT0vQKJeA5YGxCzdF2F6PZiGDlgMTsdToGtmK8CKpKvAgz66l2rAwhAb6hJwK/i+7cTeAvNm9lBSDWhF/l9IgNkhs1we5oCvAGZ2H9iIyM0mwCTlw4C6pDv+fTciN5lQLa7481VMoGoCJzwMH8dF4LNvymP9CPQqMi7gib9fiMj0EmCzIgIGXPP3GxGZzQRYrcD4N+C0mUnSZeBcRG41TRL39mnoRU5I18zsmcd+HnjU5/9Wkcto3WXmgrGbA+6C45JaRS4jC3L664i+78A74Agw42OfgJ3IxjsDHC3gvbNm9iZk3Za0O4JreDcsSIqUZGXjl5kdiBWlDapHIyxK/xLwen0bmK7Q+HS2Nxh7YzL21uz/bE5H2Z7/AawM/+HMgWgPAAAAAElFTkSuQmCC">
-                    <strong> ORCID </strong>
-                </button>
-            </div>
-        </div>
-
-        <input type="hidden" id="authstate" name="authstate" value="{{ authstate }}" />
-        <input type="hidden" id="source" name="source" value="default-sp" />
-    </form>
-
-    <div class="metalist list-group">
-        <form action="{{ currentUrl }}" method="post">
-            {% for idp in metadata %}
-                <button class="metaentry list-group-item" type="submit" name="idpentityid" value="{{ idp.entityid }}">
-                    <strong>{{ idp.name.en }}</strong>
-                </button>
-            {% endfor %}
-
-            <input type="hidden" id="authstate" name="authstate" value="{{ authstate }}" />
-            <input type="hidden" id="source" name="source" value="default-sp" />
-        </form>
-    </div>
+    {% if wayf_config.userpass.order == 3 %}
+        {% include 'userpass.twig' %}
+    {% elseif wayf_config.preferred_idps.order == 3 %}
+        {% include 'preferred_idps.twig' %}
+    {% elseif wayf_config.idps.order == 3 %}
+        {% include 'idps.twig' %}
+    {% else %}
+        <h1>ERROR</h1>
+    {% endif %}
 
 {% endblock %}

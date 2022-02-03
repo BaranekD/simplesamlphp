@@ -1,0 +1,35 @@
+<form id="external" action="{{ currentUrl }}" method="post" name="g">
+    {% set counter = 0 %}
+    {% for idp in wayf_config.preferred_idps.idp_list %}
+        {% set counter = counter + 1 %}
+
+        {% if counter % 3 == 1 %}
+            <div class="row preferred-row">
+                <div class="col-md-4">
+                    <button class="metaentry list-group-item preferred-item" style="color: {{ idp.color_text }}; background-color: {{ idp.color_background }}" type="submit" name="idpentityid" value="{{ idp.entityid }}">
+                        <strong>{{ idp.name }}</strong>
+                    </button>
+                </div>
+        {% elseif counter % 3 == 2 %}
+                <div class="col-md-4">
+                    <button class="metaentry list-group-item preferred-item" style="color: {{ idp.color_text }}; background-color: {{ idp.color_background }}" type="submit" name="idpentityid" value="{{ idp.entityid }}">
+                        <strong>{{ idp.name }}</strong>
+                    </button>
+                </div>
+        {% elseif counter % 3 == 0 %}
+                <div class="col-md-4">
+                    <button class="metaentry list-group-item preferred-item" style="color: {{ idp.color_text }}; background-color: {{ idp.color_background }}" type="submit" name="idpentityid" value="{{ idp.entityid }}">
+                        <strong>{{ idp.name }}</strong>
+                    </button>
+                </div>
+            </div> {# row #}
+        {% endif %}
+    {% endfor %}
+
+    {% if counter % 3 != 0 %}
+        </div> {# row #}
+    {% endif %}
+
+    <input type="hidden" id="authstate" name="authstate" value="{{ authstate }}" />
+    <input type="hidden" id="source" name="source" value="default-sp" />
+</form>

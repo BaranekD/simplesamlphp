@@ -23,15 +23,20 @@ if (array_key_exists('source', $_POST)) {
     }
 }
 
+$metadataStorageHandler = MetaDataStorageHandler::getMetadataHandler();
+$wayfConfig = $state['wayf_config'];
+
+$metadata = $metadataStorageHandler->getList('metadata-edugain/saml20-idp-remote');
+$metadata = array_diff_key($metadata, array_flip((array) $wayfConfig['idps']['exclude']));
+
 $globalConfig = Configuration::getInstance();
 $t = new Template($globalConfig, 'campusMultiauth:selectsource.php');
-
-$metadataStorageHandler = MetaDataStorageHandler::getMetadataHandler();
 
 array_key_exists('wrongUserPass', $_REQUEST) ? $t->data['wrongUserPass'] = true : $t->data['wrongUserPass'] = false;
 $t->data['authstate'] = $authStateId;
 $t->data['currentUrl'] = htmlentities($_SERVER['PHP_SELF']);
-$t->data['metadata'] = $metadataStorageHandler->getList('metadata-edugain/saml20-idp-remote');
+$t->data['metadata'] = $metadata;
+$t->data['wayf_config'] = $state['wayf_config'];
 
 $t->show();
 exit();

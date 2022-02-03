@@ -1,9 +1,6 @@
 msgid "{campusMultiauth:wrong_user_pass}"
 msgstr "Chybné uživatelské jméno nebo heslo!"
 
-msgid "{campusMultiauth:username}"
-msgstr "Uživatelské jméno"
-
 msgid "{campusMultiauth:password}"
 msgstr "Heslo"
 
