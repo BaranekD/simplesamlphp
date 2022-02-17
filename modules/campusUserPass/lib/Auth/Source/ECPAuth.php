@@ -4,13 +4,20 @@ declare(strict_types=1);
 
 namespace SimpleSAML\Module\campusUserPass\Auth\Source;
 
+use SAML2\Assertion;
+use SAML2\DOMDocumentFactory;
+use SAML2\Message;
+use SAML2\Utils;
+use SAML2\XML\saml\Issuer;
 use SimpleSAML\Auth\Source;
 use SimpleSAML\Auth\State;
 use SimpleSAML\Error\AuthSource;
 use SimpleSAML\Error\Error;
 use SimpleSAML\Error\Exception;
+use SimpleSAML\Logger;
 use SimpleSAML\Module;
 use SimpleSAML\Module\core\Auth\UserPassBase;
+use SimpleSAML\Store;
 use SimpleSAML\Utils\HTTP;
 use SimpleXMLElement;
 
@@ -31,6 +38,11 @@ class ECPAuth extends UserPassBase
         $this->ecpIdpUrl = $config['ecpIdpUrl'];
         if (empty($this->ecpIdpUrl)) {
             throw new Exception('Missing mandatory configuration option \'ecpIdpUrl\'.');
+        }
+
+        $this->expectedIssuer = $config['expectedIssuer'];
+        if (empty($this->expectedIssuer)) {
+            throw new Exception('Missing mandatory configuration option \'expectedIssuer\'.');
         }
     }
 
@@ -57,18 +69,28 @@ class ECPAuth extends UserPassBase
             throw new AuthSource($this->sp, 'Could not find authentication source.');
         }
 
-        $spconfig = $source-> getMetadata();
+        $spMetadata = $source->getMetadata();
 
-        $xml = new SimpleXMLElement('<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/"></S:Envelope>');
+        $xml = new SimpleXMLElement(
+            '<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/"></S:Envelope>'
+        );
 
         $xmlBody = $xml->addChild('S:Body');
-        $xmlRequest = $xmlBody->addChild('samlp:AuthnRequest', null, 'urn:oasis:names:tc:SAML:2.0:protocol');
+        $xmlRequest = $xmlBody->addChild(
+            'samlp:AuthnRequest',
+            null,
+            'urn:oasis:names:tc:SAML:2.0:protocol'
+        );
         $xmlRequest->addAttribute('ID', '' . rand() . '');
         $xmlRequest->addAttribute('IssueInstant', '' . gmdate('Y-m-d\TH:i:s\Z', time()) . '');
         $xmlRequest->addAttribute('Version', '2.0');
         $xmlRequest->addAttribute('AssertionConsumerServiceIndex', '2');
 
-        $xmlRequest->addChild('saml:Issuer', $spconfig->getString('entityid'), 'urn:oasis:names:tc:SAML:2.0:assertion');
+        $xmlRequest->addChild(
+            'saml:Issuer',
+            $spMetadata->getString('entityid'),
+            'urn:oasis:names:tc:SAML:2.0:assertion'
+        );
 
         $ch = curl_init();
 
@@ -82,32 +104,69 @@ class ECPAuth extends UserPassBase
         $response = curl_exec($ch);
         curl_close($ch);
 
-        $responseXml = new SimpleXMLElement($response);
-        $responseXml->registerXPathNamespace('SOAP-ENV', 'http://schemas.xmlsoap.org/soap/envelope/');
-        $responseXml->registerXPathNamespace('samlp', 'urn:oasis:names:tc:SAML:2.0:protocol');
-        $responseXml->registerXPathNamespace('saml', 'urn:oasis:names:tc:SAML:2.0:assertion');
+        $document = DOMDocumentFactory::fromString($response);
+        $xml = $document->firstChild;
+        $results = Utils::xpQuery($xml, '/soap-env:Envelope/soap-env:Body/*[1]');
+        $response = Message::fromXML($results[0]);
 
-        $statusCodeValue = $responseXml
-            ->xpath("/SOAP-ENV:Envelope/SOAP-ENV:Body/samlp:Response/samlp:Status/samlp:StatusCode")[0]
-            ->attributes()
-            ->Value;
-
-        if (strpos($statusCodeValue->asXML(), 'Success') === false) {
-            throw new Error('WRONGUSERPASS');
+        $issuer = $response->getIssuer();
+        if ($issuer === null) {
+            foreach ($response->getAssertions() as $a) {
+                if ($a instanceof Assertion) {
+                    $issuer = $a->getIssuer();
+                    break;
+                }
+            }
+            if ($issuer === null) {
+                throw new Exception('Missing <saml:Issuer> in message delivered to AssertionConsumerService.');
+            }
+        }
+        if ($issuer instanceof Issuer) {
+            $issuer = $issuer->getValue();
+            if ($issuer === null) {
+                throw new Exception('Missing <saml:Issuer> in message delivered to AssertionConsumerService.');
+            }
+        }
+        if ($this->expectedIssuer !== $issuer) {
+            throw new Exception('Unexpected issuer in the ECP response');
         }
 
-        $attributeStatement = $responseXml->xpath(
-            "/SOAP-ENV:Envelope/SOAP-ENV:Body/samlp:Response/saml:Assertion/saml:AttributeStatement/saml:Attribute"
-        );
+        $idpMetadata = $source->getIdPmetadata($issuer);
+        Logger::debug('Received SAML2 Response from ' . var_export($issuer, true) . '.');
 
-        $result = [];
-        foreach ($attributeStatement as $child) {
-            $attrValue = (string) $child->xpath('saml:AttributeValue')[0];
-            $attrName = (string) $child->attributes()->Name;
+        try {
+            $assertions = Module\saml\Message::processResponse($spMetadata, $idpMetadata, $response);
+        } catch (Module\saml\Error $e) {
+            if (str_contains($e->getMessage(), 'WRONGUSERPASS')) {
+                throw new Error('WRONGUSERPASS');
+            }
 
-            $result[$attrName] = [$attrValue];
+            throw new Exception('Error while processing the response: ' . $e);
         }
 
-        return $result;
+        $attributes = [];
+        foreach ($assertions as $assertion) {
+            // check for duplicate assertion (replay attack)
+            $store = Store::getInstance();
+            if ($store !== false) {
+                $aID = $assertion->getId();
+                if ($store->get('saml.AssertionReceived', $aID) !== null) {
+                    throw new Exception('Received duplicate assertion.');
+                }
+
+                $notOnOrAfter = $assertion->getNotOnOrAfter();
+                if ($notOnOrAfter === null) {
+                    $notOnOrAfter = time() + 24 * 60 * 60;
+                } else {
+                    $notOnOrAfter += 60; // we allow 60 seconds clock skew, so add it here also
+                }
+
+                $store->set('saml.AssertionReceived', $aID, true, $notOnOrAfter);
+            }
+
+            $attributes = array_merge($attributes, $assertion->getAttributes());
+        }
+
+        return $attributes;
     }
 }
