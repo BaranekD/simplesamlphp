@@ -1,10 +1,19 @@
 $(".mySelect").select2({
-    data: data,
+    ajax: {
+        url: 'https://ip-147-251-124-162.flt.cloud.muni.cz/campus-idp/module.php/campusMultiauth/idpSearch.php',
+        dataType: 'json',
+        delay: 250,
+        processResults: function (data) {
+            return {
+                results: data.items,
+            };
+        },
+        cache: true
+    },
+
     placeholder: "Select an institution",
-    allowClear: false,
     minimumInputLength: 3,
-    templateResult: formatState,
-    templateSelection: formatState
+    templateResult: formatRepo,
 });
 $('.mySelect')
     .val(null).trigger('change')
@@ -14,25 +23,11 @@ $('.mySelect')
         $('#idps_form').submit();
     });
 
-// .on('select2:open', function () {
-    //     $('.select2-container').css('margin-bottom', $('.select2-dropdown').css('height'));
-    //     // document.getElementBy('idps_form').style.marginBottom = '250px';
-    // })
-    // .on('change', function () {
-    //     $('.select2-container').css('margin-bottom', $('.select2-dropdown').css('height'));
-    //     // document.getElementBy('idps_form').style.marginBottom = '250px';
-    // })
-    // .on('select2:close', function () {
-    //     $('.select2-container').css('margin-bottom', '0px');
-    //     // document.getElementById('idps_form').style.marginBottom = '0px';
-    // });
-
-function formatState (opt) {
-    if (!opt.id || !opt.image) {
-        return opt.text;
+function formatRepo(repo)
+{
+    if (repo.loading) {
+        return repo.text;
     }
 
-    // return opt.text;
-
-     return $('<span>' + opt.text + ' ' + '<img src="' + opt.image + '" height="19px" width="19px" /></span>');
+    return $('<span>' + repo.text + ' ' + '<img src="' + repo.image + '" height="19px" width="19px" /></span>');
 }

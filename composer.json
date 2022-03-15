@@ -88,13 +88,9 @@
         "symfony/routing": "^4.4 || ^5.0",
         "symfony/var-exporter": "^4.4 || ^5.0",
         "symfony/yaml": "^4.4 || ^5.0",
-<<<<<<< Updated upstream
-        "twig/twig": "^1.43 || ^2.0"
-=======
         "twig/twig": "^1.43 || ^2.0",
       "ext-soap": "*",
         "ext-simplexml": "*"
->>>>>>> Stashed changes
     },
     "require-dev": {
         "ext-curl": "*",

@@ -836,10 +836,6 @@ class SP extends \SimpleSAML\Auth\Source
             }
         }
 
-        if (isset($_POST['idpentityid'])) {
-            $idp = $_POST['idpentityid'];
-        }
-
         if ($idp === null) {
             $this->startDisco($state);
             assert(false);

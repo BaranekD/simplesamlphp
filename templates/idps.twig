@@ -1,15 +1,9 @@
 <div class="metalist list-group">
     <form id="idps_form" action="{{ currentUrl }}" method="post">
-        <select class="mySelect js-states form-control col-12" style="width: 100%" autofocus>
-            <option></option>
-        </select>
+        <select class="mySelect" style="width: 100%"></select>
 
         <input type="hidden" id="idpentityid" name="idpentityid" />
         <input type="hidden" id="authstate" name="authstate" value="{{ authstate }}" />
         <input type="hidden" id="source" name="source" value="default-sp" />
     </form>
 </div>
-
-<script>
-    var data = {{ metadata | json_encode | raw }};
-</script>
