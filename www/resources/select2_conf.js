@@ -29,5 +29,14 @@ function formatRepo(repo)
         return repo.text;
     }
 
-    return $('<span>' + repo.text + ' ' + '<img src="' + repo.image + '" height="19px" width="19px" /></span>');
+    return $(
+        '<div class="row" style="height: 50px">' +
+            '<div class="col-10" style="margin: auto">' +
+                '<span>' + repo.text + '</span>' +
+            '</div>' +
+            '<div class="col-2">' +
+                '<span><img src="' + repo.image + '" style="height: 50px; width: 50px; object-fit: cover; object-position: left"/></span>' +
+            '</div>' +
+        '</div>'
+    );
 }
