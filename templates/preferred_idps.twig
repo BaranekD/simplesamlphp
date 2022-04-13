@@ -1,25 +1,47 @@
 <form id="external" action="{{ currentUrl }}" method="post" name="g">
     {% set counter = 0 %}
-    {% for idp in wayf_config.preferred_idps.idp_list %}
+
+    {% for idp in configuration.idp_list %}
         {% set counter = counter + 1 %}
 
         {% if counter % 3 == 1 %}
             <div class="row preferred-row">
                 <div class="col-md-4 preferred-item">
                     <button class="metaentry list-group-item preferred-item-button" style="color: {{ idp.color_text }}; background-color: {{ idp.color_background }}" type="submit" name="idpentityid" value="{{ idp.entityid }}">
-                        <strong>{{ idp.name }}</strong>
+                        <div class="row">
+                            <div class="col-2">
+                                <span><img src="{{ idp.logo }}" style="height: 40px; width: 40px; object-fit: cover; object-position: left"/></span>
+                            </div>
+                            <div class="col-10" style="margin: auto">
+                                <strong>{{ idp.name }}</strong>
+                            </div>
+                        </div>
                     </button>
                 </div>
         {% elseif counter % 3 == 2 %}
                 <div class="col-md-4 preferred-item">
                     <button class="metaentry list-group-item preferred-item-button" style="color: {{ idp.color_text }}; background-color: {{ idp.color_background }}" type="submit" name="idpentityid" value="{{ idp.entityid }}">
-                        <strong>{{ idp.name }}</strong>
+                        <div class="row">
+                            <div class="col-2">
+                                <span><img src="{{ idp.logo }}" style="height: 40px; width: 40px; object-fit: cover; object-position: left"/></span>
+                            </div>
+                            <div class="col-10" style="margin: auto">
+                                <strong>{{ idp.name }}</strong>
+                            </div>
+                        </div>
                     </button>
                 </div>
         {% elseif counter % 3 == 0 %}
                 <div class="col-md-4 preferred-item">
                     <button class="metaentry list-group-item preferred-item-button" style="color: {{ idp.color_text }}; background-color: {{ idp.color_background }}" type="submit" name="idpentityid" value="{{ idp.entityid }}">
-                        <strong>{{ idp.name }}</strong>
+                        <div class="row">
+                            <div class="col-2">
+                                <span><img src="{{ idp.logo }}" style="height: 40px; width: 40px; object-fit: cover; object-position: left"/></span>
+                            </div>
+                            <div class="col-10" style="margin: auto">
+                                <strong>{{ idp.name }}</strong>
+                            </div>
+                        </div>
                     </button>
                 </div>
             </div> {# row #}
@@ -33,3 +55,7 @@
     <input type="hidden" id="authstate" name="authstate" value="{{ authstate }}" />
     <input type="hidden" id="source" name="source" value="default-sp" />
 </form>
+
+
+
+

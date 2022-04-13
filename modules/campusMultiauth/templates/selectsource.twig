@@ -6,35 +6,15 @@
 {#    <link rel="stylesheet" type="text/css" href="/{{ baseurlpath }}resources/select2.min.css" />#}
     <link rel="stylesheet" type="text/css" href="/{{ baseurlpath }}resources/select2-bootstrap-5-theme.min.css" />
 
-    {% if wayf_config.userpass.order == 1 %}
-        {% include 'userpass.twig' %}
-    {% elseif wayf_config.preferred_idps.order == 1 %}
-       {% include 'preferred_idps.twig' %}
-    {% elseif wayf_config.idps.order == 1 %}
-        {% include 'idps.twig' %}
-    {% else %}
-        <h1>ERROR</h1>
-    {% endif %}
-
-    {% if wayf_config.userpass.order == 2 %}
-        {% include 'userpass.twig' %}
-    {% elseif wayf_config.preferred_idps.order == 2 %}
-        {% include 'preferred_idps.twig' %}
-    {% elseif wayf_config.idps.order == 2 %}
-        {% include 'idps.twig' %}
-    {% else %}
-        <h1>ERROR</h1>
-    {% endif %}
-
-    {% if wayf_config.userpass.order == 3 %}
-        {% include 'userpass.twig' %}
-    {% elseif wayf_config.preferred_idps.order == 3 %}
-        {% include 'preferred_idps.twig' %}
-    {% elseif wayf_config.idps.order == 3 %}
-        {% include 'idps.twig' %}
-    {% else %}
-        <h1>ERROR</h1>
-    {% endif %}
+    {% for component_configuration in wayf_config.components %}
+        {% if component_configuration.name == 'userpass' %}
+            {{ include('userpass.twig', {configuration: component_configuration}) }}
+        {% elseif component_configuration.name == 'preferred' %}
+            {{ include('preferred_idps.twig', {configuration: component_configuration}) }}
+        {% elseif component_configuration.name == 'idps' %}
+            {{ include('idps.twig', {configuration: component_configuration}) }}
+        {% endif %}
+    {% endfor %}
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/select2.js"></script>
